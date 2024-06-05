@@ -1,23 +1,30 @@
 <script lang="ts">
+import { defineComponent } from 'vue'
+import type { Contract } from '@/models/Contract'
+import axios from 'axios'
+
+//todo extract
 const API_URL = 'https://localhost:5001'
 
-export default {
+export default defineComponent({
+  name: 'ContractsView',
   components: {},
   data() {
     return {
-      contracts: []
+      contracts: [] as Contract[]
     }
   },
   created() {
     this.getContracts()
   },
   methods: {
-    async getContracts() {
+    async getContracts(): Contract[] {
       const url = `${API_URL}/contracts`
-      this.contracts = await (await fetch(url)).json()
+      const response = await axios.get(url)
+      this.contracts = response.data
     }
   }
-}
+})
 </script>
 
 <template>
@@ -25,7 +32,7 @@ export default {
     <h1>Contracts</h1>
     <router-link to="/contracts/new">Create New Contract</router-link>
     <ul>
-      <li v-for="contract in contracts" v-bind:key="contract.id">
+      <li v-for="contract in contracts" :key="contract.id">
         {{ contract.id }}
         {{ contract.authorName }}
         {{ contract.legalEntityName }}
