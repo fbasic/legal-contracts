@@ -1,4 +1,6 @@
 <script lang="ts">
+const API_URL = 'https://localhost:5001'
+
 export default {
   components: {},
   data() {
@@ -6,9 +8,14 @@ export default {
       contracts: []
     }
   },
-  methods: {},
-  mounted() {
-    console.log('contracts view mounted!')
+  created() {
+    this.getContracts()
+  },
+  methods: {
+    async getContracts() {
+      const url = `${API_URL}/contracts`
+      this.contracts = await (await fetch(url)).json()
+    }
   }
 }
 </script>
@@ -17,6 +24,16 @@ export default {
   <div>
     <h1>Contracts</h1>
     <router-link to="/contracts/new">Create New Contract</router-link>
+    <ul>
+      <li v-for="contract in contracts" v-bind:key="contract.id">
+        {{ contract.id }}
+        {{ contract.authorName }}
+        {{ contract.legalEntityName }}
+        {{ contract.legalEntityDescription }}
+        {{ contract.createdAt }}
+        {{ contract.updatedAt }}
+      </li>
+    </ul>
   </div>
 </template>
 
