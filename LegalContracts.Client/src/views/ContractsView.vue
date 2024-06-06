@@ -4,7 +4,7 @@ import type { Contract } from '@/models/Contract'
 import axios from 'axios'
 
 //todo extract
-const API_URL = 'https://localhost:5001'
+const API_URL = 'https://localhost:5001/api'
 
 export default defineComponent({
   name: 'ContractsView',

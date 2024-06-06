@@ -1,28 +1,25 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import ContractForm from '@/components/ContractForm.vue'
+import { Contract } from '@/models/contract'
 import axios from 'axios'
-import type { CreateContractRequest } from '@/models/requests/createContractRequest'
 
 //todo extract
-const API_URL = 'https://localhost:5001'
+const API_URL = 'https://localhost:5001/api'
 
 export default defineComponent({
   name: 'ContractCreateView',
+  components: { ContractForm },
   methods: {
-    async createContract() {
-      const contractRequest: CreateContractRequest = {
-        authorName: 'John Smith',
-        legalEntityName: 'MegaCorp',
-        legalEntityDescription: 'Big Company'
-      }
-      await axios.post(`${API_URL}/contracts`, contractRequest)
+    async createContract(contract: Contract) {
+      await axios.post(`${API_URL}/contracts`, contract)
     }
   }
 })
 </script>
 
 <template>
-  <button @click="createContract">Add</button>
+  <contract-form @on-submit="createContract" />
 </template>
 
 <style scoped></style>

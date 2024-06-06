@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LegalContracts.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ContractsController : ControllerBase
     {
         private static readonly List<LegalContract> Contracts = new List<LegalContract>
@@ -22,24 +23,76 @@ namespace LegalContracts.Server.Controllers
         };
 
         [HttpGet]
-        public IEnumerable<LegalContract> Get()
+        public IActionResult GetAll()
         {
-            return Contracts;
+            var contracts = Contracts
+                .OrderBy(contract => contract.Id)
+                .ToList();
+            
+            return Ok(contracts);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IActionResult Get([FromRoute] int id)
+        {
+            var contract = Contracts
+                .SingleOrDefault(contract => contract.Id == id);
+            
+            if (contract == null)
+            {
+                return BadRequest("Contract not found");
+            }
+
+            return Ok(contract);
         }
         
         [HttpPost]
-        public void Post([FromBody] CreateContractRequest createContractRequest)
+        public IActionResult Post([FromBody] ContractRequest contractRequest)
         {
             var contract = new LegalContract
             {
                 Id = Contracts.Count + 1,
-                AuthorName = createContractRequest.AuthorName,
-                LegalEntityName = createContractRequest.LegalEntityName,
-                LegalEntityDescription = createContractRequest.LegalEntityDescription,
+                AuthorName = contractRequest.AuthorName,
+                LegalEntityName = contractRequest.LegalEntityName,
+                LegalEntityDescription = contractRequest.LegalEntityDescription,
                 CreatedAt = DateTime.UtcNow
             };
             
             Contracts.Add(contract);
+            return Ok(contract);
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult Put([FromRoute] int id, [FromBody] ContractRequest contractRequest)
+        {
+            var contract = Contracts.SingleOrDefault(contract => contract.Id == id);
+            if (contract == null)
+            {
+                return BadRequest("Contract not found");
+            }
+
+            contract.AuthorName = contractRequest.AuthorName;
+            contract.LegalEntityName = contractRequest.LegalEntityName;
+            contract.LegalEntityDescription = contractRequest.LegalEntityDescription;
+            contract.UpdatedAt = DateTime.UtcNow;
+
+            return Ok(contract);
+        }
+        
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IActionResult Put([FromRoute] int id)
+        {
+            var contract = Contracts.SingleOrDefault(contract => contract.Id == id);
+            if (contract == null)
+            {
+                return BadRequest("Contract not found");
+            }
+
+            Contracts.Remove(contract);
+            return Ok(contract);
         }
     }
 }

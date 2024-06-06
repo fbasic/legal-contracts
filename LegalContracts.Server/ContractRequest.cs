@@ -1,6 +1,6 @@
 ﻿namespace LegalContracts.Server
 {
-    public class CreateContractRequest
+    public class ContractRequest
     {
         public string AuthorName { get; set; }
 
