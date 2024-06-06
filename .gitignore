@@ -33,4 +33,5 @@ coverage
 
 bin/
 obj/
+.vs/
 

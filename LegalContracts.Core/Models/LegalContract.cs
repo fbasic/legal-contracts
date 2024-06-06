@@ -1,6 +1,6 @@
 using System;
 
-namespace LegalContracts.API
+namespace LegalContracts.Core.Models
 {
     public class LegalContract
     {

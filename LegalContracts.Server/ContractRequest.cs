@@ -1,4 +1,4 @@
-﻿namespace LegalContracts.Server
+﻿namespace LegalContracts.API
 {
     public class ContractRequest
     {

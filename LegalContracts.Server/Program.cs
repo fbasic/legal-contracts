@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace LegalContracts.Server
+namespace LegalContracts.API
 {
     public class Program
     {
