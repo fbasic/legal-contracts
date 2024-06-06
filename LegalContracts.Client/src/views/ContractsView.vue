@@ -17,9 +17,12 @@ export default defineComponent({
   },
   methods: {
     async getContracts(): Contract[] {
-      const url = `${API_URL}/contracts`
-      const response = await axios.get(url)
+      const response = await axios.get(`${API_URL}/contracts`)
       this.contracts = response.data
+    },
+    async deleteContract(id: number) {
+      await axios.delete(`${API_URL}/contracts/${id}`)
+      this.getContracts()
     }
   }
 })
@@ -29,16 +32,17 @@ export default defineComponent({
   <div>
     <h1>Contracts</h1>
     <router-link to="/contracts/new">Create New Contract</router-link>
-    <ul>
-      <li v-for="contract in contracts" :key="contract.id">
+    <div>
+      <div v-for="contract in contracts" :key="contract.id">
         {{ contract.id }}
         {{ contract.authorName }}
         {{ contract.legalEntityName }}
         {{ contract.legalEntityDescription }}
         {{ contract.createdAt }}
         {{ contract.updatedAt }}
-      </li>
-    </ul>
+        <input type="button" @click="deleteContract(contract.id)" value="Delete" />
+      </div>
+    </div>
   </div>
 </template>
 

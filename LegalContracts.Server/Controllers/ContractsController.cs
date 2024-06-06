@@ -83,7 +83,7 @@ namespace LegalContracts.Server.Controllers
         
         [HttpDelete]
         [Route("{id:int}")]
-        public IActionResult Put([FromRoute] int id)
+        public IActionResult Delete([FromRoute] int id)
         {
             var contract = Contracts.SingleOrDefault(contract => contract.Id == id);
             if (contract == null)
