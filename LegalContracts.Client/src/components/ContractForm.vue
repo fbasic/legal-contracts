@@ -12,7 +12,7 @@ export default defineComponent({
       authorName: this.contract?.authorName || '',
       legalEntityName: this.contract?.legalEntityName || '',
       legalEntityDescription: this.contract?.legalEntityDescription || '',
-      formTouched: false
+      triedSubmit: false
     }
   },
   computed: {
@@ -23,12 +23,12 @@ export default defineComponent({
       return this.legalEntityName && this.legalEntityName.length > 0
     },
     isFormValid() {
-      return !this.formTouched || (this.isValidAuthorName && this.isValidLegalName)
+      return !this.triedSubmit || (this.isValidAuthorName && this.isValidLegalName)
     }
   },
   methods: {
     async handleSubmit() {
-      this.formTouched = true
+      this.triedSubmit = true
 
       if (this.isFormValid) {
         this.$emit('on-submit', {
@@ -36,6 +36,8 @@ export default defineComponent({
           legalEntityName: this.legalEntityName,
           legalEntityDescription: this.legalEntityDescription
         })
+
+        this.$router.push(`/contracts`)
       }
     }
   }
@@ -50,9 +52,9 @@ export default defineComponent({
         type="text"
         id="authorName"
         v-model="authorName"
-        class="w-full mt-1 p-2 bg-gray-100 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
+        class="w-full mt-1 p-2 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
       />
-      <div v-if="formTouched && !isValidAuthorName" class="text-red-600 text-sm mt-1">
+      <div v-if="triedSubmit && !isValidAuthorName" class="text-red-600 text-sm mt-1">
         Please enter a valid author name
       </div>
     </div>
@@ -64,9 +66,9 @@ export default defineComponent({
         type="text"
         id="legalEntityName"
         v-model="legalEntityName"
-        class="w-full mt-1 p-2 bg-gray-100 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
+        class="w-full mt-1 p-2 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
       />
-      <div v-if="formTouched && !isValidLegalName" class="text-red-600 text-sm mt-1">
+      <div v-if="triedSubmit && !isValidLegalName" class="text-red-600 text-sm mt-1">
         Please enter a valid legal entity name
       </div>
     </div>
@@ -74,11 +76,11 @@ export default defineComponent({
       <label for="legalEntityDescription" class="block text-sm font-medium text-gray-700"
         >Legal Entity Description</label
       >
-      <input
+      <textarea
         type="text"
         id="legalEntityDescription"
         v-model="legalEntityDescription"
-        class="w-full mt-1 p-2 bg-gray-100 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
+        class="w-full mt-1 p-2 border-gray-500 rounded-md focus:outline-none focus:ring focus:ring-green-300"
       />
     </div>
     <button

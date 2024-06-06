@@ -25,15 +25,23 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2>Contract Details</h2>
-  <ul>
-    <li>ID: {{ contract.id }}</li>
-    <li>Author Name: {{ contract.authorName }}</li>
-    <li>Legal Entity Name: {{ contract.legalEntityName }}</li>
-    <li>Legal Entity Description: {{ contract.legalEntityDescription }}</li>
-    <li>Created At: {{ contract.createdAt }}</li>
-    <li>Updated At: {{ contract.updatedAt }}</li>
-  </ul>
+  <div class="p-10 bg-gray-50">
+    <div v-if="contract">
+      <h1 class="text-3xl text-green-600 mb-6">Contract Details</h1>
+      <p class="block text-sm font-medium text-gray-700">ID</p>
+      <p class="text-gray-600 mb-2">{{ contract.id }}</p>
+      <p class="block text-sm font-medium text-gray-700">Author Name</p>
+      <p class="text-gray-600 mb-2">{{ contract.authorName }}</p>
+      <p class="block text-sm font-medium text-gray-700">Legal Entity Name</p>
+      <p class="text-gray-600 mb-2">{{ contract.legalEntityName }}</p>
+      <p class="block text-sm font-medium text-gray-700">Legal Entity Description</p>
+      <p class="text-gray-600 mb-2">{{ contract.legalEntityDescription }}</p>
+      <p class="block text-sm font-medium text-gray-700">Created At</p>
+      <p class="text-gray-600 mb-2">{{ contract.createdAt }}</p>
+      <p class="block text-sm font-medium text-gray-700">Updated At</p>
+      <p class="text-gray-600 mb-2">{{ contract.updatedAt }}</p>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>

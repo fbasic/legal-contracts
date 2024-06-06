@@ -1,23 +1,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import ContractForm from '@/components/ContractForm.vue'
-import { Contract } from '@/models/contract'
 import axios from 'axios'
 import { API_URL } from '@/constants/constants'
+import type { ContractRequest } from '@/models/requests/contractRequest'
 
 export default defineComponent({
   name: 'ContractCreateView',
   components: { ContractForm },
   methods: {
-    async createContract(contract: Contract) {
-      await axios.post(`${API_URL}/contracts`, contract)
+    async createContract(contractRequest: ContractRequest) {
+      await axios.post(`${API_URL}/contracts`, contractRequest)
+      this.$router.push(`/contracts`)
     }
   }
 })
 </script>
 
 <template>
-  <div class="p-10">
+  <div class="p-10 bg-gray-50">
     <h1 class="text-3xl text-green-600 mb-6">Create New Contract</h1>
     <contract-form @on-submit="createContract" />
   </div>

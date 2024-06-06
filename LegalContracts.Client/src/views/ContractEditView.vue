@@ -33,11 +33,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="contract">
+  <div v-if="contract" class="p-10 bg-gray-50">
+    <h1 class="text-3xl text-green-600 mb-6">Edit Contract</h1>
     <contract-form :contract="contract" @on-submit="updateContract" />
-  </div>
-  <div v-else>
-    <p>Loading...</p>
   </div>
 </template>
 

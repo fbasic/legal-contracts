@@ -23,13 +23,16 @@ export default defineComponent({
     async deleteContract(id: number) {
       await axios.delete(`${API_URL}/contracts/${id}`)
       this.getContracts()
+    },
+    navigateTo(route: string) {
+      this.$router.push(route)
     }
   }
 })
 </script>
 
 <template>
-  <div class="p-10">
+  <div class="p-10 bg-gray-50">
     <h1 class="text-3xl text-green-600 mb-6">Contracts</h1>
     <RouterLink
       to="/contracts/new"
@@ -41,8 +44,12 @@ export default defineComponent({
       <div
         v-for="contract in contracts"
         :key="contract.id"
-        class="bg-gray-100 p-6 rounded-lg shadow-md relative"
+        class="bg-white p-6 rounded-lg shadow-md relative"
       >
+        <i
+          @click="navigateTo(`/contracts/${contract.id}/edit`)"
+          class="fas fa-pencil-alt text-gray-600 absolute top-5 right-12 cursor-pointer"
+        ></i>
         <i
           @click="deleteContract(contract.id)"
           class="fas fa-trash-alt text-red-600 cursor-pointer absolute top-5 right-4"
@@ -51,17 +58,17 @@ export default defineComponent({
           {{ contract.authorName }}
         </h2>
         <p class="text-gray-600 mb-2">
-          {{ contract.legalEntityName }} - {{ contract.legalEntityDescription }}
+          {{ contract.legalEntityName }}
         </p>
-        <p class="text-gray-500 text-sm mb-2">
-          <strong>Created At:</strong>
-          {{ new Date(contract.createdAt).toLocaleString() }}
+        <p class="text-gray-600 mb-2">
+          {{ contract.legalEntityDescription }}
         </p>
-        <p class="text-gray-500 text-sm mb-4">
-          <span v-if="contract.updatedAt">
-            <strong>Updated At:</strong> {{ new Date(contract.updatedAt).toLocaleString() }}
-          </span>
-        </p>
+        <RouterLink
+          :to="`contracts/${contract.id}`"
+          class="text-green-500 text-sm underline cursor-pointer"
+        >
+          See Details
+        </RouterLink>
       </div>
     </div>
   </div>
