@@ -4,9 +4,7 @@ import ContractForm from '@/components/ContractForm.vue'
 import axios from 'axios'
 import { Contract } from '@/models/contract'
 import type { ContractRequest } from '@/models/requests/contractRequest'
-
-//todo extract
-const API_URL = 'https://localhost:5001/api'
+import { API_URL } from '@/constants/constants'
 
 export default defineComponent({
   name: 'ContractEditView',

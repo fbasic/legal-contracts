@@ -16,7 +16,13 @@ export default defineComponent({
   },
   computed: {
     isValidAuthorName() {
-      return false
+      return this.authorName && this.authorName.length > 0
+    },
+    isValidLegalName() {
+      return this.legalEntityName && this.legalEntityName.length > 0
+    },
+    isFormValid() {
+      return this.isValidAuthorName && this.isValidLegalName
     }
   },
   methods: {
@@ -38,11 +44,11 @@ export default defineComponent({
     <div v-if="!isValidAuthorName" class="error">Please enter a valid author name</div>
     <label>Legal Entity Name</label>
     <input type="text" required v-model="legalEntityName" />
-    <div v-if="!isValidAuthorName" class="error">Please enter a valid author name</div>
+    <div v-if="!isValidLegalName" class="error">Please enter a valid author name</div>
     <label>Legal Entity Description</label>
-    <input type="text" required v-model="legalEntityDescription" />
+    <input type="text" v-model="legalEntityDescription" />
 
-    <input type="submit" />
+    <input type="submit" :disabled="!isFormValid" />
   </form>
 </template>
 

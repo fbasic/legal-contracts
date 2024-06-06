@@ -2,9 +2,7 @@
 import { defineComponent } from 'vue'
 import type { Contract } from '@/models/Contract'
 import axios from 'axios'
-
-//todo extract
-const API_URL = 'https://localhost:5001/api'
+import { API_URL } from '@/constants/constants'
 
 export default defineComponent({
   name: 'ContractsView',

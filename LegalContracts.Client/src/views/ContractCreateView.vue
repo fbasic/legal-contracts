@@ -3,9 +3,7 @@ import { defineComponent } from 'vue'
 import ContractForm from '@/components/ContractForm.vue'
 import { Contract } from '@/models/contract'
 import axios from 'axios'
-
-//todo extract
-const API_URL = 'https://localhost:5001/api'
+import { API_URL } from '@/constants/constants'
 
 export default defineComponent({
   name: 'ContractCreateView',
