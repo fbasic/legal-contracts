@@ -36,8 +36,6 @@ export default defineComponent({
           legalEntityName: this.legalEntityName,
           legalEntityDescription: this.legalEntityDescription
         })
-
-        this.$router.push(`/contracts`)
       }
     }
   }
@@ -85,7 +83,7 @@ export default defineComponent({
     </div>
     <button
       type="submit"
-      class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-colors duration-300"
+      class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-800 transition-colors duration-300"
     >
       Submit
     </button>

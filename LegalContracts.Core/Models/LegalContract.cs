@@ -1,6 +1,6 @@
 using System;
 
-namespace LegalContracts.Server
+namespace LegalContracts.API
 {
     public class LegalContract
     {

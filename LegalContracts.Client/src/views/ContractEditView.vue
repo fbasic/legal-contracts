@@ -27,6 +27,7 @@ export default defineComponent({
     },
     async updateContract(contractRequest: ContractRequest) {
       await axios.put(`${API_URL}/contracts/${this.contract?.id}`, contractRequest)
+      this.$router.push(`/contracts`)
     }
   }
 })
