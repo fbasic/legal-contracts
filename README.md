@@ -14,7 +14,7 @@ The backend of this system provides RESTful API endpoints for managing legal con
 - Delete a contract
 
 ### API Documentation
-The API documentation can be found [here](docs/api_documentation.md).
+The API documentation can be found [here](Docs/api_documentation.md).
 
 ### Technologies Used
 - .NET Core 3.1
