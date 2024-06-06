@@ -17,7 +17,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <contract-form @on-submit="createContract" />
+  <div class="p-10">
+    <h1 class="text-3xl text-green-600 mb-6">Create New Contract</h1>
+    <contract-form @on-submit="createContract" />
+  </div>
 </template>
 
 <style scoped></style>

@@ -3,6 +3,6 @@ export interface Contract {
   authorName: string
   legalEntityName: string
   legalEntityDescription: string
-  createdAt: Date
-  updatedAt?: Date
+  createdAt: string
+  updatedAt?: string
 }

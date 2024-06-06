@@ -29,18 +29,39 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-    <h1>Contracts</h1>
-    <router-link to="/contracts/new">Create New Contract</router-link>
-    <div>
-      <div v-for="contract in contracts" :key="contract.id">
-        {{ contract.id }}
-        {{ contract.authorName }}
-        {{ contract.legalEntityName }}
-        {{ contract.legalEntityDescription }}
-        {{ contract.createdAt }}
-        {{ contract.updatedAt }}
-        <input type="button" @click="deleteContract(contract.id)" value="Delete" />
+  <div class="p-10">
+    <h1 class="text-3xl text-green-600 mb-6">Contracts</h1>
+    <RouterLink
+      to="/contracts/new"
+      class="inline-block bg-green-600 text-white py-2 px-4 rounded hover:bg-green-800 mb-6"
+    >
+      New Contract
+    </RouterLink>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        v-for="contract in contracts"
+        :key="contract.id"
+        class="bg-gray-100 p-6 rounded-lg shadow-md relative"
+      >
+        <i
+          @click="deleteContract(contract.id)"
+          class="fas fa-trash-alt text-red-600 cursor-pointer absolute top-5 right-4"
+        ></i>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+          {{ contract.authorName }}
+        </h2>
+        <p class="text-gray-600 mb-2">
+          {{ contract.legalEntityName }} - {{ contract.legalEntityDescription }}
+        </p>
+        <p class="text-gray-500 text-sm mb-2">
+          <strong>Created At:</strong>
+          {{ new Date(contract.createdAt).toLocaleString() }}
+        </p>
+        <p class="text-gray-500 text-sm mb-4">
+          <span v-if="contract.updatedAt">
+            <strong>Updated At:</strong> {{ new Date(contract.updatedAt).toLocaleString() }}
+          </span>
+        </p>
       </div>
     </div>
   </div>
